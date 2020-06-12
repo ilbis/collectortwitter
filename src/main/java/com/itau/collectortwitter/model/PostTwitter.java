@@ -1,13 +1,14 @@
 package com.itau.collectortwitter.model;
 
 import java.io.Serializable;
-import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,14 +29,12 @@ public class PostTwitter implements Serializable {
 	@Column(name = "TEXT", nullable = false, length = 255)
 	private String text;
 
-	@Column(name = "TIME", nullable = false, unique = true)
-	private Instant time;
+	private ListPostTwitter listPostTwitter;
 
 	public PostTwitter(String name, int followers, String text) {
 		this.name = name;
 		this.followers = followers;
 		this.text = text;
-		this.time = Instant.now();
 	}
 
 	public String getText() {
