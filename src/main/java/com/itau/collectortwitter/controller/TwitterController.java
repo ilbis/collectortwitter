@@ -16,7 +16,7 @@ import com.itau.collectortwitter.service.TwitterService;
 public class TwitterController {
 
 	@Autowired
-	TwitterService twitterService;
+	private TwitterService twitterService;
 
 	@GetMapping(value = "/alltweets")
 	public Map<String, List<PostTwitter>> listTweets() throws Exception {
