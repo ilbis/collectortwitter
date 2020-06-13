@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.itau.collectortwitter.model.ListPostTwitter;
 import com.itau.collectortwitter.model.PostTwitter;
 
 import twitter4j.Query;
@@ -20,10 +21,10 @@ import twitter4j.TwitterFactory;
 @Component(value = "twitterService")
 public class TwitterService {
 
-	public Map<String, List<PostTwitter>> returnAllTweets() {
+	public Map<String, ListPostTwitter> returnAllTweets() {
 
 		final int countQuery = 10;
-		Map<String, List<PostTwitter>> response = new HashMap<>();
+		Map<String, ListPostTwitter> response = new HashMap<>();
 
 		List<String> valueQuery = new ArrayList<>();
 		valueQuery.add("\"%23cloud\"");
@@ -60,7 +61,9 @@ public class TwitterService {
 				});
 				currentResponse = currentResponse.subList(0, 5);
 
-				response.put(currentQuery.replace("\"%23", "#").replace("\"", ""), currentResponse);
+				response.put(currentQuery, new ListPostTwitter(currentQuery.replace("\"%23", "#").replace("\"", ""), currentResponse));
+//				response.add("teste", new ListPostTwitter(null, currentQuery.replace("\"%23", "#").replace("\"", ""), currentResponse));
+//				response.add(currentQuery.replace("\"%23", "#").replace("\"", ""), currentResponse);
 			} catch (TwitterException e) {
 				e.printStackTrace();
 			}

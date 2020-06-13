@@ -21,7 +21,7 @@ public class ListPostTwitter implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 
 	@Column(name = "HASHTAG", nullable = false, unique = false)
 	private String hashtag;
@@ -36,8 +36,7 @@ public class ListPostTwitter implements Serializable {
 	public ListPostTwitter() {
 	}
 
-	public ListPostTwitter(Long id, String hashtag, List<PostTwitter> listPostTwitter) {
-		this.id = id;
+	public ListPostTwitter(String hashtag, List<PostTwitter> listPostTwitter) {
 		this.hashtag = hashtag;
 		this.listPostTwitter = listPostTwitter;
 		this.time = Instant.now();

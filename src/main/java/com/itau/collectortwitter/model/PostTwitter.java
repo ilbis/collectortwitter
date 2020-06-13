@@ -16,7 +16,7 @@ public class PostTwitter implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	@Column(name = "NAME", nullable = false, unique = true, length = 255)
 	private String name;
@@ -26,6 +26,13 @@ public class PostTwitter implements Serializable {
 
 	@Column(name = "TEXT", nullable = false, length = 255)
 	private String text;
+
+//	@ManyToOne
+//	@JoinColumn(name = "LIST_POST_TWITTER_ID")
+//	private ListPostTwitter listPostTwitter;
+
+	public PostTwitter() {
+	}
 
 	public PostTwitter(String name, int followers, String text) {
 		this.name = name;
