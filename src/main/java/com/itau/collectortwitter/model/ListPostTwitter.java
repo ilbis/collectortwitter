@@ -1,7 +1,6 @@
 package com.itau.collectortwitter.model;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,9 +25,6 @@ public class ListPostTwitter implements Serializable {
 	@Column(name = "HASHTAG", nullable = false, unique = false)
 	private String hashtag;
 
-	@Column(name = "TIME", nullable = false, unique = true)
-	private Instant time;
-
 	@OneToMany
 	@JoinColumn(name = "LIST_POST_TWITTER_ID")
 	private List<PostTwitter> listPostTwitter = new ArrayList<>();
@@ -39,7 +35,6 @@ public class ListPostTwitter implements Serializable {
 	public ListPostTwitter(String hashtag, List<PostTwitter> listPostTwitter) {
 		this.hashtag = hashtag;
 		this.listPostTwitter = listPostTwitter;
-		this.time = Instant.now();
 	}
 
 	public List<PostTwitter> getListPostTwitter() {
@@ -64,14 +59,6 @@ public class ListPostTwitter implements Serializable {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public Instant getTime() {
-		return time;
-	}
-
-	public void setTime(Instant time) {
-		this.time = time;
 	}
 
 }
