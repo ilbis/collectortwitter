@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,8 +26,6 @@ public class PostTwitter implements Serializable {
 
 	@Column(name = "TEXT", nullable = false, length = 255)
 	private String text;
-
-	private ListPostTwitter listPostTwitter;
 
 	public PostTwitter(String name, int followers, String text) {
 		this.name = name;

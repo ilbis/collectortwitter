@@ -2,8 +2,8 @@ package com.itau.collectortwitter.model;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,18 +21,34 @@ public class ListPostTwitter implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
+
+	@Column(name = "HASHTAG", nullable = false, unique = false)
+	private String hashtag;
 
 	@Column(name = "TIME", nullable = false, unique = true)
 	private Instant time;
 
 	@OneToMany
 	@JoinColumn(name = "LIST_POST_TWITTER_ID")
-	private Set<PostTwitter> listPostTwitter = new HashSet<>();
+	private List<PostTwitter> listPostTwitter = new ArrayList<>();
 
-	public ListPostTwitter(long id, Set<PostTwitter> listPostTwitter) {
+	public ListPostTwitter() {
+	}
+
+	public ListPostTwitter(Long id, String hashtag, List<PostTwitter> listPostTwitter) {
 		this.id = id;
+		this.hashtag = hashtag;
+		this.listPostTwitter = listPostTwitter;
 		this.time = Instant.now();
+	}
+
+	public String getHashtag() {
+		return hashtag;
+	}
+
+	public void setHashtag(String hashtag) {
+		this.hashtag = hashtag;
 	}
 
 	public long getId() {
