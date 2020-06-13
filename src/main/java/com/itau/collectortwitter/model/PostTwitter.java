@@ -27,10 +27,6 @@ public class PostTwitter implements Serializable {
 	@Column(name = "TEXT", nullable = false, length = 255)
 	private String text;
 
-//	@ManyToOne
-//	@JoinColumn(name = "LIST_POST_TWITTER_ID")
-//	private ListPostTwitter listPostTwitter;
-
 	public PostTwitter() {
 	}
 

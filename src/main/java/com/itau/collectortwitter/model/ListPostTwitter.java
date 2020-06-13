@@ -42,6 +42,14 @@ public class ListPostTwitter implements Serializable {
 		this.time = Instant.now();
 	}
 
+	public List<PostTwitter> getListPostTwitter() {
+		return listPostTwitter;
+	}
+
+	public void setListPostTwitter(List<PostTwitter> listPostTwitter) {
+		this.listPostTwitter = listPostTwitter;
+	}
+
 	public String getHashtag() {
 		return hashtag;
 	}

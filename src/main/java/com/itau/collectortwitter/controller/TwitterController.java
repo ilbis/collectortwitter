@@ -1,6 +1,7 @@
 package com.itau.collectortwitter.controller;
 
-import java.util.Map;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,7 @@ public class TwitterController {
 	private TwitterService twitterService;
 
 	@GetMapping(value = "/alltweets")
-	public Map<String, ListPostTwitter> listTweets() throws Exception {
+	public List<ListPostTwitter> listTweets() throws Exception {
 		return twitterService.returnAllTweets();
 	}
 
