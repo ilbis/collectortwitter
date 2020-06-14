@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.itau.collectortwitter.model.ListPostTwitter;
 import com.itau.collectortwitter.model.Moment;
 import com.itau.collectortwitter.model.PostTwitter;
+import com.itau.collectortwitter.repository.ListPostTwitterRepository;
+import com.itau.collectortwitter.repository.MomentRepository;
+import com.itau.collectortwitter.repository.PostTwitterRepository;
 
 import twitter4j.Query;
 import twitter4j.QueryResult;
@@ -19,6 +23,15 @@ import twitter4j.TwitterFactory;
 
 @Component(value = "twitterService")
 public class TwitterService {
+
+	@Autowired
+	MomentRepository momentRepository;
+
+	@Autowired
+	ListPostTwitterRepository listPostTwitterRepository;
+
+	@Autowired
+	PostTwitterRepository postTwitterRepository;
 
 	public Moment returnAllTweets() {
 
@@ -58,16 +71,23 @@ public class TwitterService {
 				Collections.sort(currentResponse, (c1, c2) -> {
 					return c2.getFollowers() - c1.getFollowers();
 				});
-				currentResponse = currentResponse.subList(0, 5);
 
-				response.add(
-						new ListPostTwitter(currentQuery.replace("\"%23", "#").replace("\"", ""), currentResponse));
+				currentResponse = currentResponse.subList(0, 5);
+				postTwitterRepository.saveAll(currentResponse);
+
+				
+				ListPostTwitter lst = new ListPostTwitter(currentQuery.replace("\"%23", "#").replace("\"", ""), currentResponse);
+				response.add(lst);
+//						new ListPostTwitter(currentQuery.replace("\"%23", "#").replace("\"", ""), currentResponse));
+				listPostTwitterRepository.save(lst);
+//						new ListPostTwitter(currentQuery.replace("\"%23", "#").replace("\"", ""), currentResponse));
 
 			} catch (TwitterException e) {
 				e.printStackTrace();
 			}
 		});
 
+		momentRepository.save(new Moment(response));
 		return new Moment(response);
 	}
 

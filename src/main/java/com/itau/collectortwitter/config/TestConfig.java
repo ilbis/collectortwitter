@@ -24,13 +24,13 @@ public class TestConfig implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
-		PostTwitter p1 = new PostTwitter("Jr", 1000, "Teste");
-		PostTwitter p2 = new PostTwitter("Jose", 2000, "Teste2");
-		postTwitterRepository.saveAll(Arrays.asList(p1,p2));
-		
-		ListPostTwitter l1 = new ListPostTwitter("#teste", Arrays.asList(p1,p2));
-		listPostTwitterRepository.saveAll(Arrays.asList(l1));
+//
+//		PostTwitter p1 = new PostTwitter("Jr", 1000, "Teste");
+//		PostTwitter p2 = new PostTwitter("Jose", 2000, "Teste2");
+//		postTwitterRepository.saveAll(Arrays.asList(p1,p2));
+//		
+//		ListPostTwitter l1 = new ListPostTwitter("#teste", Arrays.asList(p1,p2));
+//		listPostTwitterRepository.saveAll(Arrays.asList(l1));
 		
 		
 	}

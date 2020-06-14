@@ -18,13 +18,13 @@ public class PostTwitter implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "NAME", nullable = false, unique = true, length = 255)
+	@Column(name = "NAME", nullable = false, unique = false, length = 255)
 	private String name;
 
 	@Column(name = "FOLLOWERS", nullable = false)
 	private int followers;
 
-	@Column(name = "TEXT", nullable = false, length = 255)
+	@Column(name = "TEXT", nullable = false, length = 1000)
 	private String text;
 
 	public PostTwitter() {

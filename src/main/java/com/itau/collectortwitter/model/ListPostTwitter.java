@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,12 +21,12 @@ public class ListPostTwitter implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
-	@Column(name = "HASHTAG", nullable = false, unique = false)
+	@Column(name = "HASHTAG", nullable = true, unique = false, length = 255)
 	private String hashtag;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "LIST_POST_TWITTER_ID")
 	private List<PostTwitter> listPostTwitter = new ArrayList<>();
 
@@ -51,14 +52,6 @@ public class ListPostTwitter implements Serializable {
 
 	public void setHashtag(String hashtag) {
 		this.hashtag = hashtag;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 }
