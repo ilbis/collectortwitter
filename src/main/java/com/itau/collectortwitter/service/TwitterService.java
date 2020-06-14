@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.itau.collectortwitter.model.ListPostTwitter;
+import com.itau.collectortwitter.model.Moment;
 import com.itau.collectortwitter.model.PostTwitter;
 
 import twitter4j.Query;
@@ -19,7 +20,7 @@ import twitter4j.TwitterFactory;
 @Component(value = "twitterService")
 public class TwitterService {
 
-	public List<ListPostTwitter> returnAllTweets() {
+	public Moment returnAllTweets() {
 
 		final int countQuery = 10;
 		List<ListPostTwitter> response = new ArrayList<>();
@@ -59,13 +60,15 @@ public class TwitterService {
 				});
 				currentResponse = currentResponse.subList(0, 5);
 
-				response.add(new ListPostTwitter(currentQuery.replace("\"%23", "#").replace("\"", ""), currentResponse));
+				response.add(
+						new ListPostTwitter(currentQuery.replace("\"%23", "#").replace("\"", ""), currentResponse));
 
 			} catch (TwitterException e) {
 				e.printStackTrace();
 			}
 		});
-		return response;
+
+		return new Moment(response);
 	}
 
 }
