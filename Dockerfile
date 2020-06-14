@@ -1,6 +1,6 @@
 FROM openjdk:latest
 
-ADD target/collectortwitter-0.0.1-SNAPSHOT.jar app.jar
+ADD target/collectortwitter-1.0.0.jar app.jar
 
 ENTRYPOINT ["java","-jar","app.jar"]
 
