@@ -3,12 +3,10 @@ package com.itau.collectortwitter.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.itau.collectortwitter.dto.MomentResponseDTO;
 import com.itau.collectortwitter.model.ListPostTwitter;
 import com.itau.collectortwitter.model.Moment;
 import com.itau.collectortwitter.model.PostTwitter;
@@ -92,9 +90,8 @@ public class TwitterService {
 
 	}
 
-	public List<MomentResponseDTO> returnAllTweets() {
-
-		return momentRepository.findAll().stream().map(Moment::toDTO).collect(Collectors.toList());
+	public List<Moment> returnAllTweets() {
+		return momentRepository.findAll();
 	}
 
 }

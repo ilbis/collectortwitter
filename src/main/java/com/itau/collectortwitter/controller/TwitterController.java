@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.itau.collectortwitter.dto.MomentResponseDTO;
+import com.itau.collectortwitter.model.Moment;
 import com.itau.collectortwitter.service.TwitterService;
 
 @RestController
@@ -20,7 +20,7 @@ public class TwitterController {
 	private TwitterService twitterService;
 
 	@GetMapping(value = "/alltweets")
-	public ResponseEntity<List<MomentResponseDTO>> returnAllTweets() throws Exception {
+	public ResponseEntity<List<Moment>> returnAllTweets() throws Exception {
 		return ResponseEntity.ok().body(twitterService.returnAllTweets());
 
 	}
