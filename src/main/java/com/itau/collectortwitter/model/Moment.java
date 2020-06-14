@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.itau.collectortwitter.dto.MomentResponseDTO;
+
 @Entity
 @Table(name = "MOMENT")
 public class Moment implements Serializable {
@@ -53,6 +55,10 @@ public class Moment implements Serializable {
 
 	public void setMomentlistPostTwitter(List<ListPostTwitter> momentlistPostTwitter) {
 		this.momentlistPostTwitter = momentlistPostTwitter;
+	}
+
+	public static MomentResponseDTO toDTO(Moment moment) {
+		return new MomentResponseDTO(moment);
 	}
 
 }

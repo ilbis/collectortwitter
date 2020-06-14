@@ -3,10 +3,12 @@ package com.itau.collectortwitter.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.itau.collectortwitter.dto.MomentResponseDTO;
 import com.itau.collectortwitter.model.ListPostTwitter;
 import com.itau.collectortwitter.model.Moment;
 import com.itau.collectortwitter.model.PostTwitter;
@@ -33,7 +35,7 @@ public class TwitterService {
 	@Autowired
 	PostTwitterRepository postTwitterRepository;
 
-	public Moment returnAllTweets() {
+	public void addAllTweets() {
 
 		final int countQuery = 10;
 		List<ListPostTwitter> response = new ArrayList<>();
@@ -75,12 +77,11 @@ public class TwitterService {
 				currentResponse = currentResponse.subList(0, 5);
 				postTwitterRepository.saveAll(currentResponse);
 
-				
-				ListPostTwitter lst = new ListPostTwitter(currentQuery.replace("\"%23", "#").replace("\"", ""), currentResponse);
+				ListPostTwitter lst = new ListPostTwitter(currentQuery.replace("\"%23", "#").replace("\"", ""),
+						currentResponse);
 				response.add(lst);
-//						new ListPostTwitter(currentQuery.replace("\"%23", "#").replace("\"", ""), currentResponse));
+
 				listPostTwitterRepository.save(lst);
-//						new ListPostTwitter(currentQuery.replace("\"%23", "#").replace("\"", ""), currentResponse));
 
 			} catch (TwitterException e) {
 				e.printStackTrace();
@@ -88,7 +89,12 @@ public class TwitterService {
 		});
 
 		momentRepository.save(new Moment(response));
-		return new Moment(response);
+
+	}
+
+	public List<MomentResponseDTO> returnAllTweets() {
+
+		return momentRepository.findAll().stream().map(Moment::toDTO).collect(Collectors.toList());
 	}
 
 }
